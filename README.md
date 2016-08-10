@@ -1,5 +1,5 @@
 ## Node.js for Beginners
-### Adapted from a _Develop Denver_ Talk by Ryan Ciecalone: 4 August 2016
+### Adapted from a _Develop Denver_ Talk by Ryan Ciecalone: August 4, 2016
 
 #### Objectives
 By the end of my 'Active Recall' session, I will be able to...
@@ -8,7 +8,7 @@ By the end of my 'Active Recall' session, I will be able to...
 1. Write a node program that logs 'Hello World!' to the console
 1. Create and access node modules using ```require``` and ```module.exports```
 1. Create a simple server using Node.js
-1. Serve an HTML file using a Node server
+1. Serve an HTML file to the browser using Node
 
 ##### Objective 1: Identify and describe the benefits of using Node.js
 * You can write server-side code in JavaScript! No need to learn a new language.
@@ -33,7 +33,7 @@ By the end of my 'Active Recall' session, I will be able to...
 ##### Objective 3:  Create and access node modules using ```module.exports``` and ```require```
 
 1. Make a new directory called 'make-your-own-modules'
-1. Create two different files: loud-greeting.js, and soft-greeting.js
+1. In the directory, create two different files: loud-greeting.js, and soft-greeting.js
 1. In loud-greeting.js, create an object named loud, and add a key called ```sayHi``` and a value of 'Hello There!'```var loud = { sayHi: 'HELLO THERE!'}```
 1. Create a soft greeting that returns a lowercase 'hello there' in the soft-greeting.js file
 1. Add your greetings to the module by adding ```module.exports = loud``` and ```module.exports = soft``` at the bottom of your loud-greeting.js and soft-greeting.js (if you want to examine the module, console.log it and run the loud-greeting.js file)
@@ -44,10 +44,24 @@ By the end of my 'Active Recall' session, I will be able to...
 
 #### Objective 4: Create a simple server using Node.js
 1. Make a new directory called 'simple-server'
-1. Create a new file called 'server.js'
+1. In the directory, create a new file called 'server.js'
 1. In the server.js file, use ```require``` to access node's built-in http module ```var http = require('http')```
 1. On the http object, invoke the .createServer() method, and pass in a callback function with 2 arguments: request and response
 1. On the response, invoke the .writeHead() method and pass in a status code, for now 200
 1. On another line, on the response, invoke the .end() method on the response, and pass in a message in the form of a string
 1. On the end of the create server function, invoke the .listen() method, and pass in one argument, the port number
 1. Run your server.js file with node, and then check on localhost:port-number-you-specified-in.listen(). You should see the string you passed in in the .end() method
+
+#### Objective 5: Serve an HTML file to the browser using Node
+1. Make a new directory called 'html-server'
+1. In the directory, create two new files: 'app.js' and 'index.html.'
+  - Note: I was tempted to name the file 'server.js,' but we are building a mini-application: if you add a button or some other way of interacting with the page, you have both client and server side code. Woo! A full-stack app!
+1. In the index.html file, create a page you'd like to see in the browser. For this exercise, keep it simple.
+1.  In the app.js file, use ```require``` to access node's built-in http module ```var http = require('http')```, and file server module ```var fs = require('fs')```
+1. on the fs object, invoke the .readFile() method and pass in two arguments: the path to the html file you want to serve, and a callback function that accepts the arguments of an error, and the file type, html. In the code block, write a conditional statement that if an error occurs, throw the error.
+1. On the http object, invoke the .createServer() method, and pass in a callback function with 2 arguments: request and response
+1. In the code block, invoke  the .writeHead() method on the response. Pass in a status code, and an object that has a key of ```'Content-Type'``` and a value of ```'text/html'```
+1. On the response, invoke the .write() and pass in html (the argument from .readFile())
+1. On another line, on the response, invoke the .end() method on the response.
+1. On the end of the create server function, invoke the .listen() method, and pass in one argument, the port number
+1. Run your app.js file with node, and then check on localhost:port-number-you-specified-in.listen(). You should see a rendering of your index.html!  
